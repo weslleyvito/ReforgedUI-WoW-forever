@@ -19,4 +19,4 @@ Modules\Nameplates.lua
 Modules\DamageMeter.lua
 Modules\SwingTimer.lua
 Modules\QuestTracker.lua
-Module\ExperienceBar.lua
+Modules\ExperienceBar.lua

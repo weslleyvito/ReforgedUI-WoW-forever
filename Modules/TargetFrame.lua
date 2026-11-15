@@ -295,17 +295,33 @@ function TargetModule:Init()
         end
 
         local level = UnitLevel("target")
+        local pLevel = UnitLevel("player") or 1
         local lvlStr = (level and level > 0) and tostring(level) or "??"
-        local diffColor
-        if not level or level <= 0 then
-            diffColor = { r = 1.0, g = 0.1, b = 0.1 }
-        else
-            diffColor = (GetQuestDifficultyColor and GetQuestDifficultyColor(level))
-                or (GetCreatureDifficultyColor and GetCreatureDifficultyColor(level))
-                or { r = 0.83, g = 0.69, b = 0.22 }
-        end
-        local hexColor = string.format("|cff%02x%02x%02x", math.floor(diffColor.r * 255), math.floor(diffColor.g * 255), math.floor(diffColor.b * 255))
+        local hexColor
 
+        if not level or level <= 0 then
+            hexColor = "|cffff1a1a" -- Caveira / Chefe (Vermelho)
+        else
+            local diff = level - pLevel
+            -- Limite de nível cinza no Vanilla/Classic
+            local grayDiff = (pLevel <= 5 and 5)
+                or (pLevel <= 39 and (math.floor(pLevel / 10) + 5))
+                or (pLevel <= 59 and (math.floor(pLevel / 5) + 1))
+                or 9
+
+            if diff >= 5 then
+                hexColor = "|cffff2020" -- Vermelho
+            elseif diff >= 3 then
+                hexColor = "|cffff8040" -- Laranja
+            elseif diff >= -2 then
+                hexColor = "|cffffff00" -- Amarelo (-2 a +2)
+            elseif -diff < grayDiff then
+                hexColor = "|cff40c040" -- Verde (-3 até antes de ficar cinza)
+            else
+                hexColor = "|cff808080" -- Cinza
+            end
+        end
+        
         local tname = string.upper(ReforgedUI:GetFullUnitName("target") or "")
         nameText:SetText(tag .. tname .. "  " .. hexColor .. lvlStr .. "|r")
 
