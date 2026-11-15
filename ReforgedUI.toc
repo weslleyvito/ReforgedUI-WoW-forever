@@ -1,0 +1,22 @@
+## Interface: 16001
+## Title: |cffd4af37Reforged|rUI
+## Notes: HUD minimalista inspirada em Untarnished UI
+## Author: Weslley
+## Version: 0.1.0
+## SavedVariables: ReforgedUIDB
+
+Core.lua
+Modules\BlizzardClean.lua
+Modules\PlayerFrame.lua
+Modules\TargetFrame.lua
+Modules\CastBar.lua
+Modules\ActionBars.lua
+Modules\MinimapAndQuests.lua
+Modules\GroupFrames.lua
+Modules\ChatFrame.lua
+Modules\BagsAndMicro.lua
+Modules\Nameplates.lua
+Modules\DamageMeter.lua
+Modules\SwingTimer.lua
+Modules\QuestTracker.lua
+Module\ExperienceBar.lua
